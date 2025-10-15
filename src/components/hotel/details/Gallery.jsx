@@ -1,18 +1,31 @@
-const Gallery = () => {
-  return (
-    <section className="container">
-      <div className="grid grid-cols-2 imageshowCase">
-        <img src="./assets/images/1.png" className="h-[400px]" alt="" />
+import Image from "next/image";
 
-        <div className="grid grid-cols-2 grid-rows-2 h-[400px]">
-          <img src="./assets/images/2.png" alt="" />
-          <img src="./assets/images/3.png" alt="" />
-          <img src="./assets/images/4.png" alt="" />
-          <img src="./assets/images/5.png" alt="" />
-        </div>
-      </div>
-    </section>
-  );
+const Gallery = ({ gallery }) => {
+    let images = gallery.slice(1);
+    return (
+        <section className="container">
+            <div className="grid grid-cols-2 imageshowCase">
+                <Image
+                    src={gallery[0]}
+                    alt="hotel_image"
+                    width={400}
+                    height={400}
+                />
+
+                <div className="grid grid-cols-2 grid-rows-2 h-[400px]">
+                    {images.map((item, index) => (
+                        <Image
+                            key={index}
+                            src={item}
+                            alt="hotel_image"
+                            width={200}
+                            height={170}
+                        />
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
 };
 
 export default Gallery;
