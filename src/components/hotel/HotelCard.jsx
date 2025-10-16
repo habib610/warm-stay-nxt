@@ -18,6 +18,9 @@ const HotelCard = (props) => {
                 rate={parseInt((props.highRate + props?.lowRate) / 2)}
                 property={props.propertyCategory}
                 fromListPage={true}
+                checkin={props.heckin}
+                checkout={props.checkout}
+                isBooked={props.isBooked}
             />
         </div>
     );

@@ -4,13 +4,19 @@ import Reviews from "./Reviews";
 
 const HotelSummaryInfo = ({
     fromListPage,
-
+    checkin,
+    checkout,
+    isBooked,
     name,
     city,
     property,
     rate,
     id,
 }) => {
+    let params = "";
+    if (checkin && checkout) {
+        params = `?checkin=${checkin}&checkout=${checkout}`;
+    }
     return (
         <>
             <div className={fromListPage ? "flex-1" : "flex-1 container"}>
@@ -28,6 +34,7 @@ const HotelSummaryInfo = ({
                     <HotelRatingNumber id={id} />
 
                     <Reviews id={id} />
+                    {isBooked && <span>Sold Out</span>}
                 </div>
             </div>
 
@@ -39,7 +46,12 @@ const HotelSummaryInfo = ({
                         Details
                     </Link>
                 ) : (
-                    <button className="btn-primary ">Book</button>
+                    <Link
+                        href={isBooked ? "#" : `/hotels/${id}/payment${params}`}
+                        className={isBooked ? "btn-disabled" : "btn-primary"}
+                    >
+                        Book
+                    </Link>
                 )}
             </div>
         </>
